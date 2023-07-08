@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import MyContext from './contexts/context'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { useState } from "react"
+import Login from './pages/Login/Login'
+import Cadastro from './pages/Cadastro/Cadastro'
+import Home from './pages/Home/Home'
+import NovaEntrada from './pages/NovaEntrada/NovaEntrada'
+import NovaSaida from './pages/NovaSaida/NovaSaida'
 
-function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+export default function App() {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [name, setName] = useState("")        
+    const [token, setToken] = useState("")
+    const [valor, setValor] = useState("")
+    const [description, setDescription] = useState("")
+
+
+    return (
+        <BrowserRouter>
+            <MyContext.Provider value={{email, setEmail, password, setPassword, name, setName, token, setToken, confirmPassword, setConfirmPassword, valor, setValor, description, setDescription}}>
+                <Routes>
+                    <Route path="/" element={<Login />} />
+                    <Route path="/cadastro" element={<Cadastro />} />
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/nova-entrada" element={<NovaEntrada />} />
+                    <Route path="/nova-saida" element={<NovaSaida />} />
+                </Routes>
+            </MyContext.Provider>
+        </BrowserRouter>
+    )
 }
-
-export default App
