@@ -25,7 +25,7 @@ export default function NovaEntrada() {
             visible={true}
           />)
 
-          const URL = `${process.env.REACT_APP_API_URL}/nova-entrada`
+          const URL = `${process.env.VITE_API_URL}/nova-entrada`
           const dadosCadastro = { valor, description}
           const config = {
             headers: {

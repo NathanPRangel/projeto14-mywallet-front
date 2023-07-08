@@ -26,7 +26,7 @@ export default function Login() {
       />)
 
 
-      const URL = `${process.env.REACT_APP_API_URL}/entrar`
+      const URL = `${process.env.VITE_API_URL}/entrar`
 
       const dadosCadastro = { email, password }
   
@@ -55,7 +55,7 @@ export default function Login() {
 
       <StyledForm onSubmit={entrar}>
 
-        <StyledInput
+        <StyledInput data-test="email"
           name="email"
           placeholder="E-mail"
           type="email"
@@ -63,7 +63,7 @@ export default function Login() {
           onChange={e => setEmail(e.target.value)}
           required
         />
-        <StyledInput
+        <StyledInput data-test="password"
           name="password"
           placeholder="Senha"
           type="password"
@@ -72,7 +72,7 @@ export default function Login() {
           required
         />
 
-        <StyledButton type="submit">
+        <StyledButton type="submit" data-test="sign-in-submit">
          {botaoAnimado}
         </StyledButton>
 

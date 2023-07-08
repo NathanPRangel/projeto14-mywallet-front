@@ -25,7 +25,7 @@ export default function Home() {
     }
 
  useEffect(() => {
-    const URL = `${process.env.REACT_APP_API_URL}/home`
+    const URL = `${process.env.VITE_API_URL}/home`
     const config = {
       headers: {
         Authorization: `Bearer ${token}`
@@ -62,23 +62,23 @@ export default function Home() {
 
        return (
            <Container>
-               <Topo>
+               <Topo data-test="user-name" >
                    <h1>Olá, fulano</h1>
                    <ion-icon name="log-out-outline" onClick={sair}></ion-icon>
                </Topo>
    
-               <StyledRegister>  
+               <StyledRegister data-test="registry-name">  
                    <p>Não há registros de entrada ou saída</p>
                </StyledRegister>
    
-               <StyledButtons>
+               <StyledButtons >
    
-                   <StyledButton type="submit">
+                   <StyledButton data-test="registry-amount" type="submit">
                        <ion-icon name="add-circle-outline"></ion-icon>
                        <New onClick={registarNovaEntrada}><h2>Nova entrada</h2></New>
                    </StyledButton>
    
-                   <StyledButton type="submit">
+                   <StyledButton data-test="registry-amount" type="submit">
                        <ion-icon name="remove-circle-outline"></ion-icon>
                        <New onClick={registarNovaSaida}><h2>Nova saída</h2></New>
                    </StyledButton>
@@ -91,7 +91,7 @@ export default function Home() {
 
     return (
         <Container>
-            <Topo>
+            <Topo data-test="user-name">
                 <h1>Olá, fulano</h1>
                 <ion-icon name="log-out-outline" onClick={sair}></ion-icon>
             </Topo>
@@ -108,7 +108,7 @@ export default function Home() {
 
                    </Lançamentos>
 
-                    <SaldoFinal saldo={saldo}>
+                    <SaldoFinal  data-test="total-amount" saldo={saldo}>
                         <h1>SALDO</h1>
                         <h2>{saldo}</h2>
                     </SaldoFinal>

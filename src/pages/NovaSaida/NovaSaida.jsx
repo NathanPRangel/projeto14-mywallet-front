@@ -25,7 +25,7 @@ export default function NovaSaida() {
             visible={true}
           />)
 
-          const URL = `${process.env.REACT_APP_API_URL}/nova-saida`
+          const URL = `${process.env.VITE_API_URL}/nova-saida`
           const dadosCadastro = { valor, description}
           const config = {
             headers: {

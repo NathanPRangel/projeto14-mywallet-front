@@ -25,7 +25,7 @@ export default function Cadastro() {
         visible={true}
       />)
 
-      const URL = `${process.env.REACT_APP_API_URL}/cadastrar`
+      const URL = `${process.env.VITE_API_URL}/cadastrar`
 
       const dadosCadastro = { name, email, password, confirmPassword }
   
@@ -53,7 +53,7 @@ export default function Cadastro() {
 
       <StyledForm onSubmit={cadastrar}>
 
-        <StyledInput
+        <StyledInput data-test="name"
           name="name"
           placeholder="Nome"
           type="text"
@@ -61,7 +61,7 @@ export default function Cadastro() {
           onChange={e => setName(e.target.value)}
           required
         />
-        <StyledInput
+        <StyledInput  data-test="email"
           name="email"
           placeholder="E-mail"
           type="email"
@@ -69,7 +69,7 @@ export default function Cadastro() {
           onChange={e => setEmail(e.target.value)}
           required
         />
-        <StyledInput
+        <StyledInput data-test="password"
           name="password"
           placeholder="Senha"
           type="password"
@@ -78,7 +78,7 @@ export default function Cadastro() {
           required
         />
 
-        <StyledInput
+        <StyledInput data-test="conf-password"
           name="password"
           placeholder="Confirme a senha"
           type="password"
@@ -86,7 +86,7 @@ export default function Cadastro() {
           onChange={e => setConfirmPassword(e.target.value)}
           required
         />
-        <StyledButton>
+        <StyledButton data-test="sign-up-submit">
           {botaoAnimado}
         </StyledButton>
 
