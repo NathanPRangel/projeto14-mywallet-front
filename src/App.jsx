@@ -1,39 +1,41 @@
-import GlobalStyle from "./GlobalStyle"
-import { useState } from "react"
-import { BrowserRouter, Routes, Route} from "react-router-dom"
-import Login from "./Login"
-import SignUp from "./SignUp"
-import Home from "./Home"
-import Transacoes from "./Transacoes"
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import styled from 'styled-components';
+import { useState, createContext } from 'react';
+import RenderLogin from './screens/login'
+import RenderRegister from './screens/cadastro'
+import Home from './screens/home'
+import NovaEntrada from './screens/newEntry';
+import NovaSaida from './screens/newExit';
+import { loginPostReceive } from './screens/apiUrls'
 
+export const UserContext = createContext();
 
-
-
-
-export default function App() {
-
-  const [token, setToken] = useState("")
-  const [form, setForm] = useState({ email: "", password: "" }); 
-  const [name, setName] = useState("")
-
-
-
-
+function App() {
+  const [user, setUser] = useState(loginPostReceive);
+  const userData = { user: user, setUser: setUser };
   return (
-    <BrowserRouter>
-    <GlobalStyle/>
-
-    <Routes>
-
-      <Route path="/" element={<Login form={form} setForm={setForm} setName={setName} setToken={setToken}/>}/>
-      <Route path="sign-up" element={<SignUp/>}/>
-      <Route path="/entrada" element={<Home/>}/>
-      <Route path="/nova-entrada" element={<Transacoes/>}/>
-      <Route path="/nova-saida" element={<Transacoes/>}/>
-      
-
-    </Routes>
-    </BrowserRouter>
-  )
+    <UserContext.Provider value={userData}>
+      <BlackBackground>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<RenderLogin />} />
+            <Route path="/cadastro" element={<RenderRegister />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/nova-entrada" element={<NovaEntrada />} />
+            <Route path="/nova-saida" element={<NovaSaida />} />
+          </Routes>
+        </BrowserRouter>
+      </BlackBackground>
+    </UserContext.Provider>
+  );
 }
 
+export default App;
+
+const BlackBackground = styled.div`
+background-color: #8C11BE;;
+height: 100vh;
+width:100%vw;
+display: flex;
+justify-content: center;
+`
