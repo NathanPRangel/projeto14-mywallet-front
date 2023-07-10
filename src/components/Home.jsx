@@ -29,14 +29,14 @@ export default function Home(props){
 	}
 
 	useEffect(()=>{
-		const nameProm = axios.get(`${process.env.DATABASE_URL}/userdata`,config)
+		const nameProm = axios.get(`${process.env.VITE_API_URL}/userdata`,config)
 
 		nameProm.then((res)=>setName(res.data.username)).catch(res=>console.log(res))
 	},[])
 
 
 	useEffect(()=>{
-		const transactionsProm = axios.get(`${process.env.DATABASE_URL}/transactions`,config)
+		const transactionsProm = axios.get(`${process.env.VITE_API_URL}/transactions`,config)
 
 		transactionsProm.then((res)=>setTransactions(res.data)).catch(res=>console.log(res))
 	},[])

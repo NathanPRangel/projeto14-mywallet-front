@@ -41,7 +41,7 @@ export default function NovaEntrada(props){
 		if (isNaN(Number(valor))){
 			return alert ("Valor inválido")
 		}
-		const prom = axios.post(`${process.env.DATABASE_URL}/transactions`, {
+		const prom = axios.post(`${process.env.VITE_API_URL}/transactions`, {
 			ammount: valor,
 			type: "received",
 			note: descricao

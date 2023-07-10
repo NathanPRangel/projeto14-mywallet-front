@@ -33,7 +33,7 @@ export default function Cadastro(props){
 			return alert('As senhas precisam ser iguais')
 		}
 		setLoading(true)
-		const prom = axios.post(`${process.env.DATABASE_URL}/signup`, {
+		const prom = axios.post(`${process.env.VITE_API_URL}/signup`, {
 			username, email, password
 		})
 

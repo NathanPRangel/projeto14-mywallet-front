@@ -31,7 +31,7 @@ export default function Main(props){
 	function login(event){
 		event.preventDefault();
 		setLoading(true)
-		const prom = axios.post(`${process.env.DATABASE_URL}/signin`, {
+		const prom = axios.post(`${process.env.VITE_API_URL}/signin`, {
 			email, password
 		})
 
