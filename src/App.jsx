@@ -1,30 +1,39 @@
-import {useState, useEffect} from 'react'
-import styled from 'styled-components'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import GlobalStyle from "./GlobalStyle"
+import { useState } from "react"
+import { BrowserRouter, Routes, Route} from "react-router-dom"
+import Login from "./Login"
+import SignUp from "./SignUp"
+import Home from "./Home"
+import Transacoes from "./Transacoes"
 
-import TokenContext from './contexts/TokenContext';
 
-import Cadastro from './components/Cadastro'
-import Home from './components/Home'
-import Main from './components/Main'
-import NovaEntrada from './components/NovaEntrada'
-import NovaSaida from './components/NovaSaida'
 
-export default function App(){
 
-	const [token, setToken] = useState("")
 
-	return(<>
-		<TokenContext.Provider value={{token, setToken}}>
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<Main/>}/>
-					<Route path="/cadastro" element={<Cadastro/>}/>
-					<Route path="/home" element={<Home/>}/>
-					<Route path="nova-entrada" element={<NovaEntrada/>}/>
-					<Route path="nova-saida" element={<NovaSaida/>}/>
-				</Routes>
-			</BrowserRouter>
-		</TokenContext.Provider>
-	</>)
+export default function App() {
+
+  const [token, setToken] = useState("")
+  const [form, setForm] = useState({ email: "", password: "" }); 
+  const [name, setName] = useState("")
+
+
+
+
+  return (
+    <BrowserRouter>
+    <GlobalStyle/>
+
+    <Routes>
+
+      <Route path="/" element={<Login form={form} setForm={setForm} setName={setName} setToken={setToken}/>}/>
+      <Route path="sign-up" element={<SignUp/>}/>
+      <Route path="/entrada" element={<Home/>}/>
+      <Route path="/nova-entrada" element={<Transacoes/>}/>
+      <Route path="/nova-saida" element={<Transacoes/>}/>
+      
+
+    </Routes>
+    </BrowserRouter>
+  )
 }
+
