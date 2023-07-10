@@ -1,0 +1,78 @@
+import {useState, useEffect, useContext} from 'react'
+import styled from 'styled-components'
+import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom"
+import axios from 'axios'
+
+import {GlobalStyles} from './GlobalStyles'
+import TokenContext from '../contexts/TokenContext'
+import Loading from './Loading'
+
+export default function NovaSaida(props){
+
+	const nav = useNavigate()
+
+	const [valor, setValor] = useState("")
+	const [descricao, setDescricao] = useState("")
+	const {token, setToken} = useContext(TokenContext)
+	const [loading, setLoading] = useState(false)
+
+	const config = {
+		headers: {
+			"Authorization": token
+		}
+	}
+
+	function postSuccess(res){
+		//console.log(res)
+		nav("/home")
+	}
+
+	function fail(err){
+		setLoading(false)
+		alert(err)
+	}
+
+	function salvarSaida(event){
+		event.preventDefault()
+
+		setLoading(true)
+
+		if (isNaN(Number(valor))){
+			return alert ("Valor inválido")
+		}
+		const prom = axios.post(`${process.env.DATABASE_URL}/transactions`, {
+			ammount: valor,
+			type: "spent",
+			note: descricao
+		}, config)
+
+		prom.then((res)=>postSuccess(res)).catch((res)=>fail(res))
+	}
+
+	return(<GlobalStyles>
+		{loading?<Loading/>:<></>}
+		<Layout className='animate__animated animate__fadeInDown'>
+			<form onSubmit={salvarSaida}>
+				<h2>Nova saída</h2>
+
+				<input data-test="registry-amount-input" required type="text" value={valor} onChange={e => 
+					setValor(e.target.value)
+					} placeholder='Valor'></input>
+
+				<input data-test="registry-name-input" required type="text" value={descricao} onChange={e => setDescricao(e.target.value)} placeholder='Descrição'></input>
+
+				<button data-test="registry-save" type="submit">Salvar saída</button>
+
+			</form>
+		</Layout>
+	</GlobalStyles>)
+}
+
+const Layout = styled.div`
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	height: 100vh;
+	padding-left: 25px;
+	padding-right: 25px;
+`

@@ -1,28 +1,30 @@
+import {useState, useEffect} from 'react'
+import styled from 'styled-components'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import styled from "styled-components"
-import HomePage from "./pages/HomePage"
-import SignInPage from "./pages/SignInPage"
-import SignUpPage from "./pages/SignUpPage"
-import TransactionsPage from "./pages/TransactionPage"
 
-export default function App() {
-  return (
-    <PagesContainer>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<SignInPage />} />
-          <Route path="/cadastro" element={<SignUpPage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/nova-transacao/:tipo" element={<TransactionsPage />} />
-        </Routes>
-      </BrowserRouter>
-    </PagesContainer>
-  )
+import TokenContext from './contexts/TokenContext';
+
+import Cadastro from './components/Cadastro'
+import Home from './components/Home'
+import Main from './components/Main'
+import NovaEntrada from './components/NovaEntrada'
+import NovaSaida from './components/NovaSaida'
+
+export default function App(){
+
+	const [token, setToken] = useState("")
+
+	return(<>
+		<TokenContext.Provider value={{token, setToken}}>
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<Main/>}/>
+					<Route path="/cadastro" element={<Cadastro/>}/>
+					<Route path="/home" element={<Home/>}/>
+					<Route path="nova-entrada" element={<NovaEntrada/>}/>
+					<Route path="nova-saida" element={<NovaSaida/>}/>
+				</Routes>
+			</BrowserRouter>
+		</TokenContext.Provider>
+	</>)
 }
-
-const PagesContainer = styled.main`
-  background-color: #8c11be;
-  width: calc(100vw - 50px);
-  max-height: 100vh;
-  padding: 25px;
-`
