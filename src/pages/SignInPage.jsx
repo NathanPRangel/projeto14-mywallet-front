@@ -13,7 +13,7 @@ export default function SignInPage() {
 
     if(!usuario) return alert("Preencha os campos abaixo")
 
-    const url = `${process.env.VITE_API_URL}/`;
+    const url = `${process.env.DATABASE_URL}/`;
     const promise = axios.post(url, usuario);
     promise.then((res) => {
       alert("Login realizado com sucesso!");

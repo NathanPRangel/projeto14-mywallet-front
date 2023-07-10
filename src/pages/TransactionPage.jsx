@@ -21,7 +21,7 @@ export default function TransactionsPage() {
 
     if(!novaTransacao) return alert("Preencha os campos abaixo")
 
-    const url = `${process.env.VITE_API_URL}/nova-transacao/${params.tipo}`;
+    const url = `${process.env.DATABASE_URL}/nova-transacao/${params.tipo}`;
     const promise = axios.post(url, novaTransacao, { headers: {"Authorization": localStorage.getItem("token") } });
     promise.then(() => {
       alert("Transação realizada com sucesso!");

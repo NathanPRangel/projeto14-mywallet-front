@@ -15,7 +15,7 @@ export default function HomePage() {
       navigate("/");
     }
 
-    const url = `${process.env.VITE_API_URL}/home`;
+    const url = `${process.env.DATABASE_URL}/home`;
     const promise = axios.get(url, { headers: {"Authorization": localStorage.getItem("token") } })
     promise.then((res) => {
       setTransacoes(res.data);

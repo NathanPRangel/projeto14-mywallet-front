@@ -16,7 +16,7 @@ export default function SignUpPage() {
     if(body.password !== confirmaSenha){
       return alert("Senha incorreta!");
     }
-    const url = `${process.env.VITE_API_URL}/cadastro`;
+    const url = `${process.env.DATABASE_URL}/cadastro`;
     const promise = axios.post(url, body);
     promise.then(() => {
       alert("Usuário cadastrado com sucesso!");
