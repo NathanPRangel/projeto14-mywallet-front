@@ -36,7 +36,7 @@ export default function Home(props){
 
 
 	useEffect(()=>{
-		const transactionsProm = axios.get(`${process.env.REACT_APP_API_URL}/transactions`,config)
+		const transactionsProm = axios.get(`${process.env.DATABASE_URL}/transactions`,config)
 
 		transactionsProm.then((res)=>setTransactions(res.data)).catch(res=>console.log(res))
 	},[])
