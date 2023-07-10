@@ -36,19 +36,19 @@ export default function TransactionsPage() {
     <TransactionsContainer>
       <h1>Nova TRANSAÇÃO</h1>
       <form onSubmit={(e) => enviar(e)}>
-        <input 
+        <input data-test="registry-amount-input"
         placeholder="Valor" 
         type="text"
         value={novaTransacao.value}
         onChange={(e) => setNovaTransacao({...novaTransacao, value: e.target.value})}
         />
-        <input 
+        <input data-test="registry-name-input"
         placeholder="Descrição" 
         type="text" 
         value={novaTransacao.description}
         onChange={(e) => setNovaTransacao({...novaTransacao, description: e.target.value})}
         />
-        <button type="submit">Salvar TRANSAÇÃO</button>
+        <button data-test="registry-save" type="submit">Salvar TRANSAÇÃO</button>
       </form>
     </TransactionsContainer>
   )

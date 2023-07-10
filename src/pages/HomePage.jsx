@@ -48,8 +48,8 @@ export default function HomePage() {
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, {localStorage.getItem("user")}</h1>
-        <BiExit onClick={deslogar}/>
+        <h1 data-test="user-name">Olá, {localStorage.getItem("user")}</h1>
+        <BiExit data-test="logout" onClick={deslogar}/>
       </Header>
 
       <TransactionsContainer>
@@ -58,12 +58,12 @@ export default function HomePage() {
         <p>Não há registros de <br />
         entrada ou saída</p>
           :
-        transacoes.map((t) => <ListItemContainer>
+        transacoes.map((t) => <ListItemContainer data-test="registry-name">
           <div>
             <span>{t.date}</span>
             <strong>{t.description}</strong>
           </div>
-          <Value color={(t.type === "saida") ? "negativo" : "positivo"}>{Number(t.value).toFixed(2)}</Value>
+          <Value data-test="registry-amount" color={(t.type === "saida") ? "negativo" : "positivo"}>{Number(t.value).toFixed(2)}</Value>
         </ListItemContainer>
         )
         }
@@ -73,18 +73,18 @@ export default function HomePage() {
         <p></p> :
         <article>
           <strong>Saldo</strong>
-          <Value color={(somaValores() < 0) ? "negativo" : "positivo"}>{somaValores()}</Value>
+          <Value data-test="total-amount" color={(somaValores() < 0) ? "negativo" : "positivo"}>{somaValores()}</Value>
         </article>
       }
       </TransactionsContainer>
 
 
       <ButtonsContainer>
-        <button onClick={() => navigate("/nova-transacao/entrada")}>
+        <button  data-test="new-income" onClick={() => navigate("/nova-transacao/entrada")}>
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
-        <button onClick={() => navigate("/nova-transacao/saida")}>
+        <button data-test="new-expense" onClick={() => navigate("/nova-transacao/saida")}>
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>

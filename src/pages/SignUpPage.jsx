@@ -31,28 +31,28 @@ export default function SignUpPage() {
     <SingUpContainer>
       <form onSubmit={(e) => Cadastrar(e)}>
         <MyWalletLogo />
-        <input
+        <input data-test="name"
           placeholder="Nome"
           type="text"
           value= {body.nome}
           onChange={(e) => setBody({...body, name: e.target.value})}
           required
         />
-        <input
+        <input data-test="email"
           placeholder="E-mail"
           type="email"
           value= {body.email}
           onChange={(e) => setBody({...body, email: e.target.value})}
           required
         />
-        <input
+        <input data-test="password"
           placeholder="Senha"
           type="password"
           value= {body.senha}
           onChange={(e) => setBody({...body, password: e.target.value})}
           autocomplete="new-password"
           required />
-        <input
+        <input data-test="conf-password"
           placeholder="Confirme a senha"
           type="password"
           value= {confirmaSenha}
@@ -60,7 +60,7 @@ export default function SignUpPage() {
           autocomplete="new-password"
           required
         />
-        <button type="submit">Cadastrar</button>
+        <button data-test="sign-up-submit" type="submit">Cadastrar</button>
       </form>
 
       <Link to="/">

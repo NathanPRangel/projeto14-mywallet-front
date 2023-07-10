@@ -32,14 +32,14 @@ export default function SignInPage() {
     <SingInContainer>
       <form onSubmit={(e) => Logar(e)}>
         <MyWalletLogo />
-        <input 
+        <input data-test="email"
         placeholder="E-mail" 
         type="email" 
         value={usuario.email}
         onChange={(e) => setUsuario({...usuario, email: e.target.value})}
         required
         />
-        <input 
+        <input data-test="password"
         placeholder="Senha" 
         type="password" 
         value={usuario.password}
@@ -47,7 +47,7 @@ export default function SignInPage() {
         required
         autocomplete="new-password" 
         />
-        <button type="submit">Entrar</button>
+        <button data-test="sign-in-submit" type="submit">Entrar</button>
       </form>
 
       <Link to="/cadastro">
