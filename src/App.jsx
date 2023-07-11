@@ -1,41 +1,38 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import styled from 'styled-components';
-import { useState, createContext } from 'react';
-import RenderLogin from './screens/login'
-import RenderRegister from './screens/cadastro'
-import Home from './screens/home'
-import NovaEntrada from './screens/newEntry';
-import NovaSaida from './screens/newExit';
-import { loginPostReceive } from './screens/apiUrls'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import styled from "styled-components"
+import HomePage from "./pages/HomePage"
+import SignInPage from "./pages/SignInPage"
+import SignUpPage from "./pages/SignUpPage"
+import TransactionsPage from "./pages/TransactionPage"
+import TransactionsPagecopy from "./pages/TransactionPagecopy"
+import { useState } from "react"
+import { LoginProvider } from "./Contexts/LoginContext.jsx"
 
-export const UserContext = createContext();
+export default function App() {
 
-function App() {
-  const [user, setUser] = useState(loginPostReceive);
-  const userData = { user: user, setUser: setUser };
+  const [tela1, setTela1] = useState(false);
+  const [tela2, setTela2] = useState(false);
+
   return (
-    <UserContext.Provider value={userData}>
-      <BlackBackground>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<RenderLogin />} />
-            <Route path="/cadastro" element={<RenderRegister />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/nova-entrada" element={<NovaEntrada />} />
-            <Route path="/nova-saida" element={<NovaSaida />} />
-          </Routes>
-        </BrowserRouter>
-      </BlackBackground>
-    </UserContext.Provider>
-  );
+    <PagesContainer>
+      <BrowserRouter>
+      <LoginProvider>
+      <Routes>
+          <Route path="/" element={<SignInPage />} />
+          <Route path="/cadastro" element={<SignUpPage />} />
+          <Route path="/home" element={<HomePage tela1={tela1} setTela1={setTela1} tela2={tela2} setTela2={setTela2} />} />
+          <Route path="/nova-transacao/:tipo" element={<TransactionsPage tela1={tela1} setTela1={setTela1} tela2={tela2} setTela2={setTela2} />} />
+          <Route path="/editar-registro/:tipo/:id" element={<TransactionsPagecopy />} />
+        </Routes>
+      </LoginProvider>
+      </BrowserRouter>
+    </PagesContainer>
+  )
 }
 
-export default App;
-
-const BlackBackground = styled.div`
-background-color: #8C11BE;;
-height: 100vh;
-width:100%vw;
-display: flex;
-justify-content: center;
+const PagesContainer = styled.main`
+  background-color: #8c11be;
+  width: calc(100vw - 50px);
+  max-height: 100vh;
+  padding: 25px;
 `
